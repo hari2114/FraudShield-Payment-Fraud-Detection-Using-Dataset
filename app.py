@@ -1,4 +1,4 @@
-from flask import Flask, request, jsonify
+from flask import Flask, request, jsonify, render_template
 from flask_cors import CORS
 import joblib
 import os
@@ -17,6 +17,10 @@ if os.path.exists(MODEL_PATH):
 else:
     print(f"Warning: Model not found at {MODEL_PATH}. Please run train.py first.")
 
+@app.route('/')
+def index():
+    return render_template('index.html')
+    
 @app.route('/predict', methods=['POST'])
 def predict():
     if model is None:
